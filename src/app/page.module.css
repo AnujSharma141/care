@@ -4,8 +4,8 @@
   justify-content: space-around !important;
   align-items: center;
 width: 100vw;
-  padding: 6rem;
-  max-height: 100vh;
+  padding: 0rem;
+  min-height: 100vh;
   background: white;
 }
 
@@ -121,7 +121,7 @@ width: 100vw;
   }
 }
 
-@media (prefers-reduced-motion) {
+@media (prefers-whiteuced-motion) {
   .card:hover span {
     transform: none;
   }
