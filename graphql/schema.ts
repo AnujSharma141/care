@@ -1,28 +1,20 @@
-export const typeDefs = `type User {
-  id: Int!
-  name: String!
-  email: String!
-  injuries: [Injury!]!
-}
+export const typeDefs = `
 
 type Injury {
-  id: Int!
+  id: String!
   name: String!
-  type: String!
   location: String!
   reportedBy: String!
   reportedDate: String!
   reportedTime: String!
   painLevel: Int!
-  patientName: String!
+  email: String!
 }
 
 type Query {
-  user(id: Int!): User
-  injuries: [Injury!]!
+  injuries(email: String!): [Injury!]!
 }
 
 type Mutation {
-  createUser(name: String!, email: String!, password: String!): User
-  addInjury(userId: Int!, name: String!, type: String, location: String, reportedBy: String, reportedDate: String, reportedTime: String, painLevel: Int, patientName: String): Injury
+  addInjury( name: String!, location: String, reportedBy: String, reportedDate: String, reportedTime: String, painLevel: Int, email: String): Injury
 }`

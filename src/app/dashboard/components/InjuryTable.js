@@ -3,7 +3,8 @@ import React, {useEffect, useState, useRef} from 'react'
 import { Table, Button, Input, Space } from "antd";
 import { SearchOutlined } from '@ant-design/icons';
 
-function InjuryTable({data}) {
+
+function InjuryTable({data, stats}) {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
@@ -108,7 +109,7 @@ function InjuryTable({data}) {
 
   return (
     <div>
-      <Table pagination={{position: ['none']}} dataSource={data.dataSource} columns={data.columns} />
+      <Table pagination={{position: ['none']}} dataSource={stats} columns={data.columns} />
     </div>
   )
 }

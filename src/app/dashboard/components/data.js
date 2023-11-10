@@ -22,9 +22,9 @@ export const mock = {
           key: 'name',
         },
         {
-          title: 'Type',
-          dataIndex: 'type',
-          key: 'type',
+          title: 'Location',
+          dataIndex: 'location',
+          key: 'location',
         },
         {
           title: 'Reported By',
@@ -33,8 +33,8 @@ export const mock = {
         },
         {
             title: 'Date',
-            dataIndex: 'date',
-            key: 'date',
+            dataIndex: 'reportedDate',
+            key: 'reportedDate',
         },
     ],
 }

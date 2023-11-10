@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
      <main className={styles.main}>
-      {isLoading? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />: 
+      {isLoading || user ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />: 
       <><div style={{marginLeft: '6rem'}}>
             <Image alt='' width={40} src={logo} />
             <Typography style={{ fontSize: '2.5vw', marginTop: '1vw', fontWeight: '500' }} className={inter.className}>Care <br /> <p style={{ fontSize: '1vw', fontWeight: '400', color: '#aeaeae' }}> /keər/ <br /> (noun) Protection</p></Typography>
