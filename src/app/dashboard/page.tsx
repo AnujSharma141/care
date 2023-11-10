@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useQuery, gql, useMutation } from '@apollo/client';
 import client from '../apolloClient';
+import Link from 'next/link';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -79,8 +80,8 @@ query Query($email: String!) {
       tabBarExtraContent=
       {{
       'left':<Image alt='' width={27} style={{margin:'1vw 8vw 0.8vw 2vw'}} src={logo}/>, 
-      'right':<Row> <Typography style={{color: '#aeaeae'}}>{user?.email}</Typography> <a style={{marginRight:'3vw', marginLeft:'5vw'}} href="/api/auth/logout"
-      >Log out</a> </Row>
+      'right':<Row> <Typography style={{color: '#aeaeae'}}>{user?.email}</Typography> <Link style={{marginRight:'3vw', marginLeft:'5vw'}} href="/api/auth/logout"
+      >Log out</Link> </Row>
       }} 
       style={{width: '100vw'}} 
       defaultActiveKey="1" 
