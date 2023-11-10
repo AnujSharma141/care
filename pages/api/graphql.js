@@ -41,6 +41,7 @@ export const config = {
 const prisma = new PrismaClient();
 
 const server = new ApolloServer({
+  cache: new InMemoryLRUCache(),
   typeDefs,
   resolvers,
   context: ({ req }) => ({
