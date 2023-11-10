@@ -3,6 +3,7 @@ import { ApolloServer } from 'apollo-server-micro';
 import { PrismaClient } from '@prisma/client';
 import { typeDefs } from '../../graphql/schema.ts'; // Import your GraphQL schema
 import resolvers from '../../graphql/resolvers'; // Create resolvers for your schema
+import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache';
 
 // const prisma = new PrismaClient();
 
