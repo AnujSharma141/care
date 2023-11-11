@@ -1,40 +1,58 @@
-export const mock = {
-    dataSource : [
-    {
-        key: 0,
-        name: "Hello Knee",
-        type: "Left Thigh Severe",
-        reportedBy: "RC Gupta",
-        date: '12 Nov 2023' // should be in utc 
-    },
-    {
-        key: 1,
-        name: "Knee Bruse",
-        type: "Right Thigh Severe",
-        reportedBy: "RC Gupta",
-        date: '15 Nov 2023' // should be in utc 
-    },
-    ],
-    columns: [
+export default function data(showModal, setRow) {    
+    return {columns: [
         {
           title: 'Name',
           dataIndex: 'name',
           key: 'name',
+          onCell: (record, rowIndex) => {
+            return {
+                onClick: (ev) => {
+                    showModal()
+                    setRow(record)
+                },
+            };
+        },
         },
         {
           title: 'Location',
           dataIndex: 'location',
           key: 'location',
+          onCell: (record, rowIndex) => {
+            return {
+                onClick: (ev) => {
+                    showModal()
+                    setRow(record)
+                },
+            };
+        },
         },
         {
           title: 'Reported By',
           dataIndex: 'reportedBy',
           key: 'reportedBy',
+          onCell: (record, rowIndex) => {
+            return {
+                onClick: (ev) => {
+                    showModal()
+                    setRow(record)
+                },
+            };
+        },
         },
         {
             title: 'Date',
             dataIndex: 'reportedDate',
             key: 'reportedDate',
+            onCell: (record, rowIndex) => {
+              return {
+                  onClick: (ev) => {
+                      showModal()
+                      setRow(record)
+                  },
+              };
+          },
         },
-    ],
+    ]}
 }
+
+
