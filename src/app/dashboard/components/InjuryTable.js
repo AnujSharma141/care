@@ -9,6 +9,10 @@ function InjuryTable({data, stats}) {
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
 
+    data.dataSource  = stats.map(item=>{
+      return{...item, key: stats.indexOf(item)}
+    })
+
     const handleSearch = (
         selectedKeys,
         confirm,
@@ -94,22 +98,22 @@ function InjuryTable({data, stats}) {
         for(let i in data.columns){
             if(data.columns[i].dataIndex === 'name'){
                 data.columns[i] = {...data.columns[i], ...getColumnSearchProps(data.columns[i].dataIndex)}
-            }else if(data.columns[i].dataIndex === 'date'){
+            }else if(data.columns[i].dataIndex === 'reportedDate'){
                 data.columns[i] = {...data.columns[i], 
                     ...getColumnSearchProps(data.columns[i].dataIndex),
                     sorter: (a, b) => 
-                        new Date(a.date) - new Date(b.date),
+                        new Date(a.reportedDate) - new Date(b.reportedDate),
                     sortDirections: ['descend', 'ascend'], 
                     }
             }
             
         }
-    },[])
-
+    },[stats, data.columns])
+    
 
   return (
     <div>
-      <Table pagination={{position: ['none']}} dataSource={stats} columns={data.columns} />
+      <Table pagination={{position: ['none']}} dataSource={data.dataSource} columns={data.columns} />
     </div>
   )
 }
