@@ -4,12 +4,12 @@ import { Table, Button, Input, Space } from "antd";
 import { SearchOutlined } from '@ant-design/icons';
 
 
-function InjuryTable({data, stats}) {
+function InjuryTable({showModal, setRow ,stats}) {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
 
-    data.dataSource  = stats.map(item=>{
+    stats = stats.map(item=>{
       return{...item, key: stats.indexOf(item)}
     })
 
@@ -27,8 +27,7 @@ function InjuryTable({data, stats}) {
         clearFilters();
         setSearchText('');
       };
-
-    const getColumnSearchProps = (dataIndex) => ({
+      const getColumnSearchProps = (dataIndex) => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
           <div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
             <Input
@@ -93,27 +92,68 @@ function InjuryTable({data, stats}) {
           }
         },
       });
-
-    useEffect(() => {
-        for(let i in data.columns){
-            if(data.columns[i].dataIndex === 'name'){
-                data.columns[i] = {...data.columns[i], ...getColumnSearchProps(data.columns[i].dataIndex)}
-            }else if(data.columns[i].dataIndex === 'reportedDate'){
-                data.columns[i] = {...data.columns[i], 
-                    ...getColumnSearchProps(data.columns[i].dataIndex),
-                    sorter: (a, b) => 
-                        new Date(a.reportedDate) - new Date(b.reportedDate),
-                    sortDirections: ['descend', 'ascend'], 
-                    }
-            }
-            
-        }
-    },[stats, data.columns])
-    
-
+      
+    const column = [
+      {
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name',
+        onCell: (record, rowIndex) => {
+          return {
+              onClick: (ev) => {
+                  showModal()
+                  setRow(record)
+              },
+          };
+      },
+      ...getColumnSearchProps('name')
+      },
+      {
+        title: 'Location',
+        dataIndex: 'location',
+        key: 'location',
+        onCell: (record, rowIndex) => {
+          return {
+              onClick: (ev) => {
+                  showModal()
+                  setRow(record)
+              },
+          };
+      },
+      },
+      {
+        title: 'Reported By',
+        dataIndex: 'reportedBy',
+        key: 'reportedBy',
+        onCell: (record, rowIndex) => {
+          return {
+              onClick: (ev) => {
+                  showModal()
+                  setRow(record)
+              },
+          };
+      },
+      },
+      {
+          title: 'Date',
+          dataIndex: 'reportedDate',
+          key: 'reportedDate',
+          onCell: (record, rowIndex) => {
+            return {
+                onClick: (ev) => {
+                    showModal()
+                    setRow(record)
+                },
+            };
+        },
+        ...getColumnSearchProps('reportedDate'),
+        sorter: (a, b) => new Date(a.reportedDate) - new Date(b.reportedDate  ),
+        sortDirections: ['descend', 'ascend'], 
+      },
+  ]
   return (
     <div>
-      <Table pagination={{position: ['none']}} dataSource={data.dataSource} columns={data.columns} />
+      <Table pagination={{position: ['none']}} dataSource={stats? stats: []} columns={column} />
     </div>
   )
 }

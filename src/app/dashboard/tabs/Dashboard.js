@@ -1,8 +1,7 @@
 "use client"
 import React, {useState} from 'react'
-import { Card, Row, Col, Statistic, Modal, Flex } from 'antd';
+import { Card, Row, Col, Statistic, Modal } from 'antd';
 import InjuryTable from '../components/InjuryTable'
-import syntax from '../components/data.js'
 import Image from 'next/image';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
@@ -86,7 +85,7 @@ export default function Dashboard({userState}) {
     <Row gutter={30} style={{width: '90vw', marginTop: '7vh', marginLeft:'5vw'}} justify='center'>
   <Col span={13} style={{ height: '70vh', border: '1px solid #EBEBEB', padding: 0, borderRadius: '0.5vw'}} >
   
-  <InjuryTable data={syntax(showModal, setRow)} stats={userState}/></Col>
+  <InjuryTable setRow={setRow} showModal={showModal} stats={userState}/></Col>
   {row?<Modal title="" open={isModalOpen} onOk={handleOk} width="50vw" onCancel={handleCancel}>
     <div style={{display: 'flex' , flexDirection: 'row'}}>
       <div style={{width: '20vw', marginTop: '1vw', display: 'flex', justifyContent: 'center', paddingLeft:'0vw', alignItems:'center', height: '60vh', background: '#09121E', borderRadius: '1vw',}}>
