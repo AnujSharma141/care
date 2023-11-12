@@ -1,6 +1,6 @@
 "use client"
 import React, {useState} from 'react'
-import { Card, Row, Col, Statistic, Modal } from 'antd';
+import { Card, Row, Col, Statistic, Modal, Progress } from 'antd';
 import InjuryTable from '../components/InjuryTable'
 import Image from 'next/image';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
@@ -86,18 +86,24 @@ export default function Dashboard({userState}) {
   <Col span={13} style={{ height: '70vh', border: '1px solid #EBEBEB', padding: 0, borderRadius: '0.5vw'}} >
   
   <InjuryTable setRow={setRow} showModal={showModal} stats={userState}/></Col>
-  {row?<Modal title="" open={isModalOpen} onOk={handleOk} width="50vw" onCancel={handleCancel}>
+  {row?<Modal title="" open={isModalOpen} onOk={handleOk} width="55vw" onCancel={handleCancel}>
     <div style={{display: 'flex' , flexDirection: 'row'}}>
       <div style={{width: '20vw', marginTop: '1vw', display: 'flex', justifyContent: 'center', paddingLeft:'0vw', alignItems:'center', height: '60vh', background: '#09121E', borderRadius: '1vw',}}>
         <Image style={{position: 'absolute', zIndex: 0, width: '20vw',marginTop: '0vw', height: '60vh'}} src={grids} alt="" />
         <Body location={row.location} />  
       </div>
       <div style={{marginLeft: '2vw', marginTop: '1vw'}}>
+        <div style={{marginTop:'1vw', color: '#aeaeae'}}>Injury Report</div>
         <h1>{row.name +" "+ row.location}</h1>
-        <div style={{marginTop: '1vw'}}>Reported By: {row.reportedBy}</div>
-        <div>Date: {row.reportedDate}</div>
+        <div style={{marginTop:'3vw', color: '#aeaeae'}}>Pain Level</div>
+        <Progress style={{ width: '20vw'}} percent={row.painLevel*20} size={'20'} status="exception" />
+        <div style={{marginTop: '0vw',}}>Date: {row.reportedDate}</div>
         <div>Time: {row.reportedTime}</div>
-        <div>Pain Level: {row.painLevel}</div>
+
+        <div style={{marginTop: '6vw', color: '#aeaeae'}}>Reported By</div>
+        <div style={{ fontSize: '1.4vw', fontWeight: '500', marginBottom: '2vw'}}>{row.reportedBy}</div>
+        
+
       </div>  
     </div>
   </Modal>:<></>}
