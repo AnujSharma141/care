@@ -31,7 +31,7 @@ export default function Home() {
             <Image alt='' width={40} src={logo} />
             <Typography style={{ fontSize: '2.5vw', marginTop: '1vw', fontWeight: '500' }} className={inter.className}>Care <br /> <p style={{ fontSize: '1vw', fontWeight: '400', color: '#aeaeae' }}> /keər/ <br /> (noun) Protection</p></Typography>
             <Link href="/api/auth/login"><Button className={inter.className} style={{ background: '#349D3E', marginTop: '25vh', padding: '1.8vh 2vw', fontWeight: '500', fontSize: '1vw', height: 'auto' }} type='primary' size='large'>Get Started</Button></Link>
-            <Typography style={{ fontSize: '0.95vw', marginTop: '7vh', textDecoration: 'underline', fontWeight: '500' }} className={inter.className}>Sign In</Typography>
+            <Link href="/api/auth/login" style={{ fontSize: '0.95vw', marginTop: '7vh', textDecoration: 'underline', fontWeight: '500' }} className={inter.className}>Sign In</Link>
           </div><div>
               <Typography style={{ fontSize: '0.95vw', color: '#AEAEAE', fontWeight: '400' }} className={inter.className}> track injuries the smart way</Typography>
 
