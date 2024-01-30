@@ -42,20 +42,34 @@ query Query($email: String!) {
       email: user?.email
     },client // Skip the query if input is not available
   });
+
+  const call = () => console.log('test')
+  if(!loading) call
   
   useEffect(() => {
     // If the user is logged in, redirect to the dashboard
     if (!user) {
       router.push('/');
     }
+    else refetch({
+      email: user?.email
+    }).then(res => setUserState(res.data?.injuries))
   }, [user, router]);
 
+
+  const updateInjuries = () =>{
+    refetch({
+      email: user?.email
+    }).then(res => {setUserState(res.data?.injuries)
+    console.log('done')
+    })
+  }
 
   const items: TabsProps['items'] = [
     {
       key: '1',
       label: 'Dashboard',
-      children: <Dashboard userState={data? data.injuries: userState}/> ,
+      children: <Dashboard updateInjuries={updateInjuries} userState={userState}/> ,
     },
     {
       key: '2',
@@ -65,7 +79,10 @@ query Query($email: String!) {
   ];
 
 
-
+  const fireRefetch = (key: string) =>{
+    if(key == '1') updateInjuries()
+  }
+ 
   return (
      <ConfigProvider theme={{
       token: {
@@ -74,16 +91,16 @@ query Query($email: String!) {
         fontFamily: 'Inter'
       },
     }}>
-    <div  style={{ background: 'white', minHeight: '100vh', width: '100vw' }}>
+    <div className={inter.className} style={{ background: '#fafafa', minHeight: '100vh', width: '100vw' }}>
       
-      <Tabs className={inter.className} 
+      <Tabs onChange={fireRefetch} className={inter.className} tabBarStyle={{background: 'white'}}
       tabBarExtraContent=
       {{
       'left':<Image alt='' width={27} style={{margin:'1vw 8vw 0.8vw 2vw'}} src={logo}/>, 
       'right':<Row> <Typography style={{color: '#aeaeae'}}>{user?.email}</Typography> <Link style={{marginRight:'3vw', marginLeft:'5vw'}} href="/api/auth/logout"
       >Log out</Link> </Row>
       }} 
-      style={{width: '100vw'}} 
+      style={{width: '100vw', }} 
       defaultActiveKey="1" 
       items={items} />
      

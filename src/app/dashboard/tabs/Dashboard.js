@@ -7,10 +7,13 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import Body from '../components/Body';
 import grids from '../../../assets/grids.png'
+import { gql, useMutation } from '@apollo/client';
+import client from '../../apolloClient';
+import toast, { Toaster } from 'react-hot-toast';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function Dashboard({userState}) {
+export default function Dashboard({updateInjuries, userState}) {
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [row, setRow] = useState(null)
@@ -44,7 +47,6 @@ export default function Dashboard({userState}) {
   }
 
   const locationCount = countLocationOccurrences(userState)
-  console.log(locationCount)
 
   function generateShadesOfGreen(n) {
     const shades = [];
@@ -81,12 +83,31 @@ export default function Dashboard({userState}) {
    },}
   }
 
+  const INJURY_MUTATION = gql`
+    mutation Mutation($id: String!) {
+    removeInjury(id: $id){
+      name
+    }
+  }
+  `;
+
+  const [deleteInjuryMutation] = useMutation(INJURY_MUTATION, {client}) 
+
+  const deleteInjury = () =>{
+    deleteInjuryMutation({variables: {id: row.id}}).then(()=>{updateInjuries()
+    toast.success('Deleted')
+    handleCancel()
+    }) 
+  }
+
   return (
+    <>
+    <Toaster />
     <Row gutter={30} style={{width: '90vw', marginTop: '7vh', marginLeft:'5vw'}} justify='center'>
   <Col span={13} style={{ height: '70vh', border: '1px solid #EBEBEB', padding: 0, borderRadius: '0.5vw'}} >
   
   <InjuryTable setRow={setRow} showModal={showModal} stats={userState}/></Col>
-  {row?<Modal title="" open={isModalOpen} onOk={handleOk} width="55vw" onCancel={handleCancel}>
+  {row?<Modal title="" open={isModalOpen} onOk={deleteInjury} width="55vw" cancelText="OK" okText="Delete" onCancel={handleOk}>
     <div style={{display: 'flex' , flexDirection: 'row'}}>
       <div style={{width: '20vw', marginTop: '1vw', display: 'flex', justifyContent: 'center', paddingLeft:'0vw', alignItems:'center', height: '60vh', background: '#09121E', borderRadius: '1vw',}}>
         <Image style={{position: 'absolute', zIndex: 0, width: '20vw',marginTop: '0vw', height: '60vh'}} src={grids} alt="" />
@@ -126,5 +147,6 @@ export default function Dashboard({userState}) {
     </Col>
   </Col>
   </Row>
+  </>
   )
 }

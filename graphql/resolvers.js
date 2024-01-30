@@ -20,6 +20,12 @@ const resolvers = {
           },
         });
       },
+
+      removeInjury: (parent, args, context) =>{
+        return context.prisma.injury.delete({
+          where: {id: args.id}
+        })
+      }
     },
   };
   

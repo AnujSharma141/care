@@ -26,10 +26,10 @@ export default function InjuryForm({location, setUserState, userState, setLocati
     const formRef = useRef(null)
     const onFinish = async (values) => {
          const {name, date, reportedBy, time, painLevel} = values
-        if(name && date && reportedBy && time){
+        if(name && date && reportedBy && time && location!==''){
           const selectedDate = `${date.$y}-${date.$M + 1}-${date.$D}`
           const selectedTime = `${time.$H}:${time.$m}`
-          const { data } = await createInjury({
+          const query = createInjury({
             variables: {
                 name: name,
                 email: user?.email,
@@ -41,7 +41,10 @@ export default function InjuryForm({location, setUserState, userState, setLocati
               },
             })
             call()
-          toast.success('Injury Reported!')
+            toast.promise(query, {
+                loading: 'loading',
+                success: 'Injury Reported!'
+            })
           setLocation('')
           formRef.current.resetFields()
 
@@ -56,7 +59,7 @@ export default function InjuryForm({location, setUserState, userState, setLocati
     <Toaster/>
       <Form ref={formRef} requiwhiteMark="optional"  initialValues={{painLevel:1}} size='large' layout='vertical' style={{width: '25vw'}} name="injury-form" onFinish={onFinish} labelCol={{ span: 10 }}>
           <Form.Item label="Name" name="name" rules={[{ requiwhite: true, message: 'Please enter a name' }]}>
-            <Input />
+            <Input placeholder='Fracture' />
           </Form.Item>
           <Row justify={'space-between'}>
           <Form.Item label="Date" name="date" >
@@ -66,7 +69,7 @@ export default function InjuryForm({location, setUserState, userState, setLocati
             <TimePicker format="HH:mm" />
           </Form.Item></Row>
           <Form.Item label="Reported By" name="reportedBy" rules={[{ requiwhite: true, message: 'Please enter the reporter' }]}>
-            <Input />
+            <Input placeholder='Dr John Doe' />
           </Form.Item>
           <Form.Item label="Pain Level" name="painLevel">
             <Slider min={1} max={5} defaultValue={[0]} />

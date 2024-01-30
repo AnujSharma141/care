@@ -17,4 +17,10 @@ type Query {
 
 type Mutation {
   addInjury( name: String!, location: String, reportedBy: String, reportedDate: String, reportedTime: String, painLevel: Int, email: String): Injury
-}`
+}
+
+type Mutation{
+  removeInjury( id: String!): Injury  
+}
+
+`
