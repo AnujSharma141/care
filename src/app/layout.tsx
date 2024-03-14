@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <title>Care</title>
+      <title>care</title>
       <UserProvider>
       <body className={inter.className}>{children}</body>
       </UserProvider>

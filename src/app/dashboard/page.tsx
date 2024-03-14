@@ -61,7 +61,6 @@ query Query($email: String!) {
     refetch({
       email: user?.email
     }).then(res => {setUserState(res.data?.injuries)
-    console.log('done')
     })
   }
 
