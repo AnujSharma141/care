@@ -1,5 +1,5 @@
 "use client"
-import {  TabsProps, Tabs, ConfigProvider, Space, Typography, Row } from 'antd';
+import {  TabsProps, Tabs, ConfigProvider, Space, Typography, Row, Spin } from 'antd';
 import logo from '../../assets/logo.png'
 import Image from 'next/image';
 import Dashboard from './tabs/Dashboard'
@@ -11,6 +11,8 @@ import { useEffect, useState } from 'react';
 import { useQuery, gql, useMutation } from '@apollo/client';
 import client from '../apolloClient';
 import Link from 'next/link';
+import { LoadingOutlined } from '@ant-design/icons';
+import styles from '../page.module.css'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -43,8 +45,6 @@ query Query($email: String!) {
     },client // Skip the query if input is not available
   });
 
-  const call = () => console.log('test')
-  if(!loading) call
   
   useEffect(() => {
     // If the user is logged in, redirect to the dashboard
@@ -83,6 +83,7 @@ query Query($email: String!) {
   }
  
   return (
+    !isLoading && user ? 
      <ConfigProvider theme={{
       token: {
         // Seed Token
@@ -104,7 +105,12 @@ query Query($email: String!) {
       items={items} />
      
     </div>
-    </ConfigProvider>
+    </ConfigProvider>:
+    <main className={styles.main}>
+    <main className={styles.main}>
+      <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
+    </main>
+    </main>
   );
 };
 
