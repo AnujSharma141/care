@@ -1,15 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 
 .main {
   display: flex;
-  font-family: "Inter", sans-serif;
+  font-family: "DM Sans", sans-serif;
   flex-direction: row;
-  justify-content: space-around !important;
+  justify-content: flex-start !important;
   align-items: center;
   width: 100vw;
   padding: 0rem;
   min-height: 100vh;
-  background: white;
+  background: #FFF6EA;
+}
+
+.center{
+  display: flex;
+  align-items: center;
+  width: 100vw;
 }
 
 .description {
@@ -112,6 +119,42 @@
 .logo {
   position: relative;
 }
+
+
+.box{
+  box-sizing: border-box !important; 
+  background: white;
+  padding: 6vh 3vw;
+  position: relative;
+  height: 60vh;
+  border-radius: 20px;
+  border: 1px solid black;
+  width: 26vw;
+  z-index: 10 !important;
+  transform-style: preserve-3d;
+}
+.box::before{
+  width: 100%;
+  margin: -4vh 0 0 -2vw  !important; 
+  content: '';
+  border-radius: 20px;
+  border: 1px solid black;
+  height: 100%;
+  background: white;
+  margin-top: 0vw;
+  position: absolute;
+  z-index: -10 !important;
+  transform: translateZ(-1px);
+}
+
+
+.graphic{
+  width: 46vw;
+  height: 100vh;
+  background-color: #0B192B;
+  margin-right: 12vw;
+}
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {

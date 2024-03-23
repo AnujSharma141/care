@@ -53,23 +53,24 @@ export default function InjuryForm({location, setUserState, userState, setLocati
         }
         
       };
+
     
   return (
     <div>
     <Toaster/>
       <Form ref={formRef} requiwhiteMark="optional"  initialValues={{painLevel:1}} size='large' layout='vertical' style={{width: '25vw'}} name="injury-form" onFinish={onFinish} labelCol={{ span: 10 }}>
           <Form.Item label="Name" name="name" rules={[{ requiwhite: true, message: 'Please enter a name' }]}>
-            <Input placeholder='Fracture' />
+            <Input placeholder='Fracture' autoComplete='off' />
           </Form.Item>
           <Row justify={'space-between'}>
-          <Form.Item label="Date" name="date" >
-            <DatePicker format="YYYY-MM-DD" />
+          <Form.Item label="Date" name="date">
+            <DatePicker  style={{width: '14vw'}} format="YYYY-MM-DD" />
           </Form.Item>
           <Form.Item label="Time" name="time">
             <TimePicker format="HH:mm" />
           </Form.Item></Row>
           <Form.Item label="Reported By" name="reportedBy" rules={[{ requiwhite: true, message: 'Please enter the reporter' }]}>
-            <Input placeholder='Dr John Doe' />
+            <Input placeholder='Dr John Doe' autoComplete='off' />
           </Form.Item>
           <Form.Item label="Pain Level" name="painLevel">
             <Slider min={1} max={5} defaultValue={[0]} />

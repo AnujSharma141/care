@@ -88,15 +88,15 @@ query Query($email: String!) {
       token: {
         // Seed Token
         colorPrimary: '#00b96b',
-        fontFamily: 'Inter'
+        fontFamily: 'DM Sans'
       },
     }}>
-    <div className={inter.className} style={{ background: '#fafafa', minHeight: '100vh', width: '100vw' }}>
+    <div style={{ background: '#fafafa', minHeight: '100vh', width: '100vw' }}>
       
-      <Tabs onChange={fireRefetch} className={inter.className} tabBarStyle={{background: 'white'}}
+      <Tabs onChange={fireRefetch} tabBarStyle={{background: 'white'}}
       tabBarExtraContent=
       {{
-      'left':<Image alt='' width={27} style={{margin:'1vw 8vw 0.8vw 2vw'}} src={logo}/>, 
+      'left':<Image alt='' width={27} style={{margin:'1vw 8vw 0.8vw 2vw'}} src={logo} unoptimized/>, 
       'right':<Row> <Typography style={{color: '#aeaeae'}}>{user?.email}</Typography> <Link style={{marginRight:'3vw', marginLeft:'5vw'}} href="/api/auth/logout"
       >Log out</Link> </Row>
       }} 
